@@ -1,0 +1,19 @@
+{
+  "name": "about-me-changer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "node-cron": "^3.0.0",
+    "node-fetch": "^3.2.4"
+  }
+}
+
