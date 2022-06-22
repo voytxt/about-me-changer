@@ -18,12 +18,7 @@ async function main() {
     return [(statusCode = 500), message];
   }
 
-  const bio = `from :flag_cz: (bit.ly/wherethefuckisczechia)
-
-tetris player (**${stats.TR}** TR, **${stats.standing}** :flag_cz:, **${stats.sprint}** 40L)
-javascript enthusiast (sometimes)
-
-pronunciation: **voy**age **ta**xi`;
+  const bio = process.env.BIO_TEMPLATE.replace('{TR}', stats.TR).replace('{standing}', stats.standing).replace('{sprint}', stats.sprint);
 
   const [success, response] = await getPreviousBio();
   if (!success) {
