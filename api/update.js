@@ -18,7 +18,10 @@ async function main() {
     return [(statusCode = 500), message];
   }
 
-  const bio = process.env.BIO_TEMPLATE.replace('{TR}', stats.TR).replace('{standing}', stats.standing).replace('{sprint}', stats.sprint);
+  const bio = process.env.BIO_TEMPLATE.replace('\\n', '\n')
+    .replace('{TR}', stats.TR)
+    .replace('{standing}', stats.standing)
+    .replace('{sprint}', stats.sprint);
 
   const [success, response] = await getPreviousBio();
   if (!success) {
