@@ -70,18 +70,22 @@ async function updateBio(bio) {
 }
 
 async function getTetrisStats() {
-  const tetrioLeague = (await (await fetch('https://ch.tetr.io/api/users/vojta'))?.json())?.data.user.league;
-  const tetrioSprint = (await (await fetch('https://ch.tetr.io/api/users/vojta/records'))?.json())?.data.records['40l'].record;
-  const jstrisSprint = (await (await fetch('https://jstris.jezevec10.com/api/u/Vojta/records/1?mode=1&'))?.json())?.min;
+  try {
+    const tetrioLeague = (await (await fetch('https://ch.tetr.io/api/users/vojta'))?.json())?.data.user.league;
+    const tetrioSprint = (await (await fetch('https://ch.tetr.io/api/users/vojta/records'))?.json())?.data.records['40l'].record;
+    const jstrisSprint = (await (await fetch('https://jstris.jezevec10.com/api/u/Vojta/records/1?mode=1&'))?.json())?.min;
 
-  if (tetrioLeague && tetrioSprint && jstrisSprint) {
-    return {
-      TR: Math.floor(tetrioLeague.rating / 100) / 10 + 'k',
-      standing: '#' + tetrioLeague.standing_local,
-      sprint: Math.min(Math.floor(jstrisSprint * 10) / 10, Math.floor(tetrioSprint.endcontext.finalTime / 100) / 10) + 's',
-    };
-  } else {
-    log("ERROR: Couldn't fetch tetris stats:", { tetrioLeague, tetrioSprint, jstrisSprint });
+    if (tetrioLeague && tetrioSprint && jstrisSprint) {
+      return {
+        TR: Math.floor(tetrioLeague.rating / 100) / 10 + 'k',
+        standing: '#' + tetrioLeague.standing_local,
+        sprint: Math.min(Math.floor(jstrisSprint * 10) / 10, Math.floor(tetrioSprint.endcontext.finalTime / 100) / 10) + 's',
+      };
+    } else {
+      log("ERROR: Couldn't fetch tetris stats:", { tetrioLeague, tetrioSprint, jstrisSprint });
+    }
+  } catch {
+    log("ERROR: Coudln't fetch tetris stats, this is probably because jstris/tetr.io responded with invalid json");
   }
 }
 
