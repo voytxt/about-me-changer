@@ -75,9 +75,9 @@ async function getTetrisStats() {
 
     if (tetrioLeague && tetrioSprint && jstrisSprint) {
       return {
-        TR: Math.floor(tetrioLeague.rating / 100) / 10 + 'k',
+        TR: (Math.floor(tetrioLeague.rating / 100) / 10).toFixed(1) + 'k',
         standing: '#' + tetrioLeague.standing_local,
-        sprint: Math.min(Math.floor(jstrisSprint * 10) / 10, Math.floor(tetrioSprint.endcontext.finalTime / 100) / 10) + 's',
+        sprint: Math.min(Math.floor(jstrisSprint * 10) / 10, Math.floor(tetrioSprint.endcontext.finalTime / 100) / 10).toFixed(1) + 's',
       };
     } else {
       log("ERROR: Couldn't fetch tetris stats:", { tetrioLeague, tetrioSprint, jstrisSprint });
